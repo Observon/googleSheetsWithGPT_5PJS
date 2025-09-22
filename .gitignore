@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+venv/
+ENV/
+
+# Env vars and credentials
+.env
+.env.*
+credentials.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Jupyter/Notebooks
+.ipynb_checkpoints/
+
+# VSCode/IDE
+.vscode/
+.idea/
