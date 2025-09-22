@@ -1,70 +1,143 @@
-# Google Drive to GPT Integration
+# Google Drive + GPT Data Analyzer
 
-This application allows you to access Google Drive, read spreadsheets, and analyze the data using OpenAI's GPT-4 model.
+Aplicação de linha de comando que lista planilhas do Google Drive, carrega os dados em `pandas` e gera análises e insights com a API da OpenAI.
 
-## Features
+## Recursos
 
-- List and access Google Sheets from your Google Drive
-- Read spreadsheet data into pandas DataFrames
-- Process and analyze data using GPT-4
-- Simple command-line interface
+- Listagem de planilhas (`Google Sheets`) no seu Drive ou em uma pasta específica.
+- Leitura da planilha como Excel via API do Drive e carregamento em `pandas`.
+- Análise estruturada dos dados + geração de insights com modelos GPT.
+- Interface simples em modo texto (menu interativo).
 
-## Prerequisites
+## Requisitos
 
-1. Python 3.8 or higher
-2. Google Cloud Project with Google Drive API enabled
-3. Service account credentials for Google Drive API
-4. OpenAI API key
+- Python 3.9 ou superior (recomendado).
+- Projeto no Google Cloud com a Google Drive API habilitada.
+- Credenciais de conta de serviço (Service Account) com permissão de leitura na(s) pasta(s) desejada(s).
+- Chave de API da OpenAI.
 
-## Setup Instructions
+## Instalação
 
-1. **Install the required packages**:
+1. Crie e ative um ambiente virtual (recomendado):
+   - PowerShell (Windows):
+     ```powershell
+     python -m venv .venv
+     .\.venv\Scripts\Activate.ps1
+     ```
+   - CMD (Windows):
+     ```bat
+     python -m venv .venv
+     .\.venv\Scripts\activate.bat
+     ```
+
+2. Instale as dependências:
    ```bash
    pip install -r requirements.txt
    ```
 
-2. **Set up Google Drive API**:
-   - Go to the [Google Cloud Console](https://console.cloud.google.com/)
-   - Create a new project or select an existing one
-   - Enable the Google Drive API
-   - Create a service account
-   - Download the service account credentials as JSON
-   - Share your Google Drive folder with the service account email (you can find it in the credentials JSON file)
+## Configuração
 
-3. **Set up environment variables**:
-   - Copy `.env.example` to `.env`
-   - Paste your service account credentials JSON content into `GOOGLE_CREDENTIALS_JSON`
-   - Add your OpenAI API key to `OPENAI_API_KEY`
-   - (Optional) Add a Google Drive folder ID to `GOOGLE_DRIVE_FOLDER_ID`
+1. Habilite a Google Drive API e gere a conta de serviço:
+   - Acesse o [Google Cloud Console](https://console.cloud.google.com/).
+   - Crie um projeto (ou utilize um existente).
+   - Habilite a Google Drive API.
+   - Crie uma Service Account e faça o download do arquivo JSON de credenciais.
+   - Compartilhe a(s) pasta(s) do Drive com o e-mail da Service Account (campo `client_email` do JSON), com permissão de Leitor.
 
-## Usage
+2. Crie o arquivo `.env` (com base em `.env.example`):
+   - Copie o exemplo:
+     ```bash
+     cp .env.example .env
+     ```
+   - Preencha as variáveis:
+     - `GOOGLE_CREDENTIALS_JSON`: pode ser o caminho do arquivo JSON (ex.: `C:\\Users\\voce\\projeto\\credentials.json`) OU o conteúdo JSON completo inline (em uma única linha).
+     - `OPENAI_API_KEY`: sua chave da OpenAI.
+     - `GOOGLE_DRIVE_FOLDER_ID` (opcional): limite a listagem a uma pasta específica do Drive.
 
-1. Run the application:
-   ```bash
-   python gdrive_gpt_app.py
-   ```
+   Dica: para obter o `folder_id`, abra a pasta no Drive e copie a parte após `folders/` na URL.
 
-2. Follow the on-screen prompts to:
-   - Select a spreadsheet from your Google Drive
-   - Enter a prompt for GPT to analyze the data
-   - View the analysis results
+3. Segurança de credenciais:
+   - Nunca versione `credentials.json` ou `.env`.
+   - Utilize apenas `GOOGLE_CREDENTIALS_JSON` apontando para um caminho local fora do repositório ou o JSON inline no `.env`.
 
-## Example Prompts
+## Execução
 
-- "What are the key trends in this data?"
-- "Summarize the main points from this spreadsheet."
-- "Are there any outliers or anomalies in this data?"
-- "Provide a detailed analysis of the sales data."
+```bash
+python gdrive_gpt_app.py
+```
 
-## Security Notes
+Você verá um menu com as opções:
 
-- Never commit your `.env` file to version control
-- Keep your API keys and credentials secure
-- The application only requests read access to your Google Drive
-- Review the permissions granted to the service account
+1. Listar planilhas disponíveis
+2. Analisar planilha específica (carrega os dados para memória)
+3. Gerar insights automáticos (usa GPT sobre os dados carregados)
+4. Fazer pergunta personalizada (prompt customizado para o GPT)
+5. Sair
 
-## Troubleshooting
+Fluxo sugerido:
 
-- If you get authentication errors, verify your service account credentials
-- Ensure the service account has access to the Google Drive folder
-- Check that your OpenAI API key is valid and has sufficient credits
+1) Use a opção 2 para carregar uma planilha.
+2) Então escolha a opção 3 (insights) ou 4 (pergunta personalizada).
+
+## Notas importantes
+
+- O carregamento da planilha é feito exportando como Excel pela API do Drive e lendo com `pandas` + `openpyxl`.
+- Se sua planilha tem múltiplas abas, por padrão é carregada a primeira. Ajuste o código em `GoogleDriveProcessor.read_spreadsheet()` para informar `sheet_name` se desejar.
+- O modelo padrão usado é `gpt-4o-mini` (configurável em `GPTDataAnalyzer.process_data_with_gpt()`).
+
+## Solução de problemas
+
+- Erro: `GOOGLE_CREDENTIALS_JSON not found` — Verifique se o `.env` foi criado e carregado corretamente, e se a variável está preenchida.
+- A Service Account não vê suas planilhas — Compartilhe a pasta/arquivo com o e-mail da Service Account como Leitor.
+- Erro ao ler Excel — Garanta que a dependência `openpyxl` está instalada (já presente no `requirements.txt`).
+- Chave da OpenAI inválida — Verifique `OPENAI_API_KEY` e se sua conta possui créditos/limites.
+- Permissões insuficientes — A aplicação utiliza escopo de leitura do Drive: `https://www.googleapis.com/auth/drive.readonly`.
+
+## Segurança
+
+- Não faça commit de `.env`, `credentials.json` ou chaves.
+- Prefira armazenar `credentials.json` fora do repositório e referenciá-lo no `.env`.
+- Revise periodicamente os acessos concedidos à Service Account.
+
+### Se você comitou `credentials.json` por engano
+
+1. Revogue/rote a chave no Google Cloud Console:
+   - IAM & Admin > Service Accounts > [sua conta] > Keys > Delete a chave exposta e crie uma nova.
+2. Remova o arquivo do histórico do Git e force push:
+   - Usando `git filter-repo` (recomendado):
+     ```bash
+     pip install git-filter-repo
+     git filter-repo --invert-paths --path credentials.json
+     git push --force
+     ```
+   - Alternativa com `git filter-branch` (mais lento/legado):
+     ```bash
+     git filter-branch --force --index-filter "git rm --cached --ignore-unmatch credentials.json" --prune-empty --tag-name-filter cat -- --all
+     git push --force --all
+     git push --force --tags
+     ```
+3. Garanta que `.gitignore` contenha `credentials.json` (já incluído neste projeto).
+
+## Estrutura principal do código
+
+- `gdrive_gpt_app.py`
+  - Classe `GoogleDriveProcessor`: autenticação com Service Account e leitura/listagem de planilhas.
+  - Classe `GPTDataAnalyzer`: preparação do resumo dos dados e chamada à API da OpenAI.
+  - Função `main()`: loop do menu e orquestração das ações.
+
+
+### Como Obter as Credenciais
+
+#### Google Drive API:
+
+Acesse Google Cloud Console
+Crie um projeto ou selecione um existente
+Ative a Google Drive API
+Crie uma conta de serviço
+Baixe o arquivo JSON das credenciais
+
+#### OpenAI API:
+
+Acesse OpenAI Platform
+Vá em "API Keys"
+Crie uma nova chave
