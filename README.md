@@ -5,7 +5,7 @@ Aplicação de linha de comando que lista planilhas do Google Drive, carrega os 
 ## Recursos
 
 - Listagem de planilhas (`Google Sheets`) no seu Drive ou em uma pasta específica.
-- Leitura da planilha como Excel via API do Drive e carregamento em `pandas`
+- Leitura da planilha como Excel via API do Drive e carregamento em `pandas`.
 - Análise estruturada dos dados + geração de insights com modelos GPT.
 - Interface simples em modo texto (menu interativo).
 
