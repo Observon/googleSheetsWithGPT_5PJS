@@ -1,0 +1,35 @@
+services:
+  api:
+    build: .
+    image: googlesheets-gpt-analyzer:latest
+    container_name: gsheet-gpt-api
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      LOG_LEVEL: INFO
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./output:/app/output
+      - ./.cache:/app/.cache
+    command: uvicorn src.api.main:app --host 0.0.0.0 --port 8000
+    restart: unless-stopped
+
+  cli:
+    build: .
+    image: googlesheets-gpt-analyzer:latest
+    container_name: gsheet-gpt-cli
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      LOG_LEVEL: INFO
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./output:/app/output
+      - ./.cache:/app/.cache
+    command: python __main__.py
+    profiles:
+      - cli
