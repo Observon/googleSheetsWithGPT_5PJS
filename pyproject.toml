@@ -62,10 +62,10 @@ test = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/gpt-sheets-analyzer"
-Documentation = "https://github.com/yourusername/gpt-sheets-analyzer#readme"
-Repository = "https://github.com/yourusername/gpt-sheets-analyzer.git"
-Issues = "https://github.com/yourusername/gpt-sheets-analyzer/issues"
+Homepage = "https://github.com/Observon/gpt-sheets-analyzer"
+Documentation = "https://github.com/Observon/gpt-sheets-analyzer#readme"
+Repository = "https://github.com/Observon/gpt-sheets-analyzer.git"
+Issues = "https://github.com/Observon/gpt-sheets-analyzer/issues"
 
 [project.scripts]
 gsheet-gpt = "src.cli.main:main"
