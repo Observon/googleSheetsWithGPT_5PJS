@@ -79,4 +79,15 @@ try:
     settings = Settings()
     settings.ensure_directories()
 except ConfigError as e:
-    raise ConfigError(f"Configuration initialization failed: {e}")
+    # Keep imports working when environment variables are not yet configured
+    # (e.g., during test collection or static analysis).
+    settings = Settings.model_construct(
+        google_credentials_json="",
+        google_drive_folder_id=None,
+        openai_api_key="",
+        log_level="INFO",
+        cache_dir=".cache",
+        output_dir="output",
+        max_spreadsheet_size_mb=100,
+    )
+    settings.ensure_directories()
