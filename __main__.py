@@ -1,6 +1,6 @@
 ﻿"Compatibility entry point for the CLI application.
 
-This file maintains backward compatibility with the original gdrive_gpt_app.py
+Standard Python entry point for module execution: python -m googlesheets-gpt-analyzer
 while delegating to the refactored src.cli.main module.
 "
 

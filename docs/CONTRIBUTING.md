@@ -262,7 +262,7 @@ Now filenames are properly sanitized.
 
 4. **Test locally**
    ```bash
-   python gdrive_gpt_app.py  # Try the CLI
+   python __main__.py  # Try the CLI (or: python -m googlesheets-gpt-analyzer)
    uvicorn src.api.main:app  # Try the API
    ```
 
@@ -436,7 +436,7 @@ Reviewers will check:
 ## Questions?
 
 - 📖 Read [ARCHITECTURE.md](ARCHITECTURE.md)
-- 🔍 Search [GitHub Issues](https://github.com/yourusername/googleSheetsWithGPT_5PJS/issues)
+- 🔍 Search [GitHub Issues](https://github.com/yourusername/googlesheets-gpt-analyzer/issues)
 - 💬 Create a [GitHub Discussion](https://github.com/yourusername/googleSheetsWithGPT_5PJS/discussions)
 
 ---

@@ -247,7 +247,7 @@ print('✅ API key valid!')
 **Solution:**
 1. Ensure you're in project root:
    ```bash
-   pwd  # should end with googleSheetsWithGPT_5PJS
+   pwd  # should end with googlesheets-gpt-analyzer
    ```
 
 2. Install in development mode:
@@ -565,4 +565,4 @@ python -m pdb -m src.cli.main
 
 **Last Updated:** March 2026
 
-For issues, open a [GitHub Issue](https://github.com/yourusername/googleSheetsWithGPT_5PJS/issues)
+For issues, open a [GitHub Issue](https://github.com/yourusername/googlesheets-gpt-analyzer/issues)
