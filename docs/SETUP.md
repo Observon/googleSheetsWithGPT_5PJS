@@ -188,7 +188,7 @@ $env:GOOGLE_CREDENTIALS_JSON = Get-Content credentials.json -Raw
 # macOS/Linux
 export GOOGLE_CREDENTIALS_JSON=$(cat credentials.json)
 
-python gdrive_gpt_app.py
+python __main__.py
 ```
 
 ### OpenAI API Errors
@@ -266,54 +266,57 @@ print('✅ API key valid!')
 
 ### Dockerfile
 
-Create `Dockerfile` in project root:
+The repository already includes a production-ready `Dockerfile`.
 
 ```dockerfile
 FROM python:3.11-slim
 
+ENV PYTHONDONTWRITEBYTECODE=1 \
+   PYTHONUNBUFFERED=1
+
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update \
+   && apt-get install -y --no-install-recommends build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
-COPY requirements.txt .
-
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application
+COPY pyproject.toml README.md ./
 COPY src ./src
-COPY .env.example .env
+COPY __main__.py ./
+COPY __init__.py ./
 
-# Set environment
-ENV PYTHONUNBUFFERED=1
-ENV LOG_LEVEL=INFO
+RUN pip install --no-cache-dir --upgrade pip \
+   && pip install --no-cache-dir .
 
-# Default command
-CMD ["python", "-m", "src.cli.main"]
+COPY .env.example ./.env.example
+COPY docs ./docs
+COPY examples ./examples
+
+RUN mkdir -p /app/output /app/.cache
+
+EXPOSE 8000
+
+CMD ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
 ### Build & Run
 
 ```bash
 # Build
-docker build -t googlesheets-gpt .
+docker build -t googlesheets-gpt-analyzer:latest .
 
-# Run CLI
-docker run -it \
-  -e GOOGLE_CREDENTIALS_JSON='...' \
-  -e OPENAI_API_KEY='...' \
-  googlesheets-gpt
+# Run API (compose)
+docker compose up api
 
-# Run API
-docker run -it -p 8000:8000 \
-  -e GOOGLE_CREDENTIALS_JSON='...' \
-  -e OPENAI_API_KEY='...' \
-  googlesheets-gpt \
-  uvicorn src.api.main:app --host 0.0.0.0
+# Run CLI (compose profile)
+docker compose run --rm cli
 ```
+
+### Docker Compose
+
+The repository includes `docker-compose.yml` with two services:
+- `api`: runs `uvicorn src.api.main:app --host 0.0.0.0 --port 8000`
+- `cli`: runs `python __main__.py` for interactive usage
 
 ### .dockerignore
 
@@ -322,9 +325,11 @@ docker run -it -p 8000:8000 \
 .gitignore
 __pycache__
 .pytest_cache
+.mypy_cache
+.ruff_cache
 .venv
 .env
-credentials.json
+*.json
 output/
 .cache/
 ```
@@ -541,7 +546,7 @@ LOG_LEVEL=DEBUG
 
 # Or via environment
 export LOG_LEVEL=DEBUG
-python gdrive_gpt_app.py
+python __main__.py
 ```
 
 ### Debug Mode
