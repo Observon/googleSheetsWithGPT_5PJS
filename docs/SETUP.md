@@ -570,4 +570,4 @@ python -m pdb -m src.cli.main
 
 **Last Updated:** March 2026
 
-For issues, open a [GitHub Issue](https://github.com/yourusername/gpt-sheets-analyzer/issues)
+For issues, open a [GitHub Issue](https://github.com/Observon/gpt-sheets-analyzer/issues)
