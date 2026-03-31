@@ -29,7 +29,7 @@ This guide covers advanced setup scenarios, troubleshooting, and production depl
 1. Go to **APIs & Services** → **Credentials**
 2. Click **Create Credentials** → **Service Account**
 3. Fill in details:
-   - Service account name: `googlesheets-gpt-analyzer`
+   - Service account name: `gpt-sheets-analyzer`
    - Description: `Service account for analyzing Google Sheets`
 4. Click **Create and Continue**
 5. Grant roles (optional for now):
@@ -247,7 +247,7 @@ print('✅ API key valid!')
 **Solution:**
 1. Ensure you're in project root:
    ```bash
-   pwd  # should end with googlesheets-gpt-analyzer
+   pwd  # should end with gpt-sheets-analyzer
    ```
 
 2. Install in development mode:
@@ -303,7 +303,7 @@ CMD ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 ```bash
 # Build
-docker build -t googlesheets-gpt-analyzer:latest .
+docker build -t gpt-sheets-analyzer:latest .
 
 # Run API (compose)
 docker compose up api
@@ -570,4 +570,4 @@ python -m pdb -m src.cli.main
 
 **Last Updated:** March 2026
 
-For issues, open a [GitHub Issue](https://github.com/yourusername/googlesheets-gpt-analyzer/issues)
+For issues, open a [GitHub Issue](https://github.com/yourusername/gpt-sheets-analyzer/issues)
