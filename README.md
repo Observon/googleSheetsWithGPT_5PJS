@@ -140,6 +140,27 @@ curl http://localhost:8000/sheets
 
 ---
 
+## 🐳 Docker
+
+```bash
+# Build image
+docker build -t googlesheets-gpt-analyzer:latest .
+
+# Run API
+docker compose up api
+
+# Run CLI (interactive profile)
+docker compose run --rm cli
+```
+
+Serviços e artefatos:
+- API em `http://localhost:8000`
+- Swagger em `http://localhost:8000/docs`
+- Saidas em `./output`
+- Cache em `./.cache`
+
+---
+
 ## 🧪 Testes
 
 ```bash
@@ -278,7 +299,7 @@ black src tests && ruff check src tests && pytest tests/
 
 - [ ] Suporte a banco de dados (SQLite/PostgreSQL)
 - [ ] Async/await para melhor performance
-- [ ] Docker & Docker Compose
+- [x] Docker & Docker Compose
 - [ ] Webhook integration
 - [ ] Dashboard web
 - [ ] i18n (múltiplos idiomas)
