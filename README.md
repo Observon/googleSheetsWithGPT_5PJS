@@ -1,6 +1,6 @@
 # Google Drive + GPT Data Analyzer
 
-[![Tests](https://github.com/yourusername/gpt-sheets-analyzer/actions/workflows/test.yml/badge.svg)](https://github.com/yourusername/gpt-sheets-analyzer/actions)
+[![Tests](https://github.com/Observon/gpt-sheets-analyzer/actions/workflows/test.yml/badge.svg)](https://github.com/Observon/gpt-sheets-analyzer/actions)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
@@ -28,7 +28,7 @@ Analisa planilhas do Google Drive, extrai insights em tempo real e gera relatór
 
 ```bash
 # Clone e acesse o repositório
-git clone https://github.com/yourusername/gpt-sheets-analyzer.git
+git clone https://github.com/Observon/gpt-sheets-analyzer.git
 cd gpt-sheets-analyzer
 
 # Crie um ambiente virtual
@@ -327,8 +327,8 @@ Contribuições são bem-vindas! Veja [CONTRIBUTING.md](docs/CONTRIBUTING.md) pa
 
 ## 💬 Suporte
 
-- 🐛 [Report a Bug](https://github.com/yourusername/gpt-sheets-analyzer/issues)
-- 💡 [Feature Request](https://github.com/yourusername/gpt-sheets-analyzer/issues)
+- 🐛 [Report a Bug](https://github.com/Observon/gpt-sheets-analyzer/issues)
+- 💡 [Feature Request](https://github.com/Observon/gpt-sheets-analyzer/issues)
 - 📖 [Documentação](docs/)
 
 ---
