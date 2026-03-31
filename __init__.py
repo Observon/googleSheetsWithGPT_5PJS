@@ -6,5 +6,5 @@ with support for caching, batch processing, and scheduled tasks.
 """
 
 __version__ = "1.0.0"
-__author__ = "Erick Mendes"
+__author__ = "Erick"
 __all__ = []
