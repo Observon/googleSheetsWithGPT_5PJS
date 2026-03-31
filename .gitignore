@@ -7,11 +7,20 @@ __pycache__/
 .venv/
 venv/
 ENV/
+*.egg
+.Python
+build/
+develop-eggs/
+dist/
 
 # Env vars and credentials
 .env
 .env.*
 credentials.json
+serviceAccountKey.json
+*.pem
+*.key
+*.crt
 
 # OS files
 .DS_Store
@@ -27,3 +36,42 @@ logs/
 # VSCode/IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+
+# Testing
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Project specific
+.cache/
+output/
+*.pdf
+*.csv
+scheduled_jobs.json
+
+# Build & Distribution
+.mypy_cache/
+.dmypy.json
+dmypy.json
+dist/
+build/
+*.egg-info/
+
+# IDE specifics
+.project
+.pydevproject
+.classpath
+.c9/
+*.sublime-workspace
+
+# Temp files
+*.tmp
+*.bak
+*.swp
+*~
+
