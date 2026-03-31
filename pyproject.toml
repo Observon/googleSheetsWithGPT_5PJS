@@ -3,7 +3,7 @@ requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "google-sheets-gpt-analyzer"
+name = "gpt-sheets-analyzer"
 version = "1.0.0"
 description = "Google Drive + GPT Data Analyzer - Intelligent data analysis tool"
 readme = "README.md"
@@ -62,10 +62,10 @@ test = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/googlesheets-gpt-analyzer"
-Documentation = "https://github.com/yourusername/googlesheets-gpt-analyzer#readme"
-Repository = "https://github.com/yourusername/googlesheets-gpt-analyzer.git"
-Issues = "https://github.com/yourusername/googlesheets-gpt-analyzer/issues"
+Homepage = "https://github.com/yourusername/gpt-sheets-analyzer"
+Documentation = "https://github.com/yourusername/gpt-sheets-analyzer#readme"
+Repository = "https://github.com/yourusername/gpt-sheets-analyzer.git"
+Issues = "https://github.com/yourusername/gpt-sheets-analyzer/issues"
 
 [project.scripts]
 gsheet-gpt = "src.cli.main:main"
