@@ -129,9 +129,6 @@ filterwarnings = [
     "ignore::PendingDeprecationWarning",
 ]
 
-[tool.pytest]
-testpaths = ["tests"]
-
 # Coverage configuration
 [tool.coverage.run]
 source = ["src"]
