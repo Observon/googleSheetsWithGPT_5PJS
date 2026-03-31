@@ -5,9 +5,9 @@ from pathlib import Path
 
 import pytest
 
-from src.services.export import ExportService
-from src.domain.models import Analysis
 from src.domain.exceptions import ApplicationError
+from src.domain.models import Analysis
+from src.services.export import ExportService
 
 
 @pytest.fixture
@@ -34,7 +34,7 @@ def sample_analysis():
 def test_export_csv(export_service, sample_analysis):
     """Test CSV export."""
     result = export_service.export_analysis(sample_analysis, "csv")
-    
+
     assert result.format == "csv"
     assert result.filepath.endswith(".csv")
     assert result.size_bytes > 0
@@ -44,12 +44,12 @@ def test_export_csv(export_service, sample_analysis):
 def test_export_markdown(export_service, sample_analysis):
     """Test Markdown export."""
     result = export_service.export_analysis(sample_analysis, "md")
-    
+
     assert result.format == "md"
     assert result.filepath.endswith(".md")
     assert result.size_bytes > 0
     assert Path(result.filepath).exists()
-    
+
     # Verify content
     with open(result.filepath) as f:
         content = f.read()
@@ -61,7 +61,7 @@ def test_export_pdf(export_service, sample_analysis):
     """Test PDF export."""
     try:
         result = export_service.export_analysis(sample_analysis, "pdf")
-        
+
         assert result.format == "pdf"
         assert result.filepath.endswith(".pdf")
         assert result.size_bytes > 0

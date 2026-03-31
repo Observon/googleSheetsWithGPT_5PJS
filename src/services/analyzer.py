@@ -4,8 +4,6 @@ import logging
 import uuid
 from typing import Optional
 
-import pandas as pd
-
 from src.adapters.cache import CacheAdapter
 from src.adapters.google_drive import GoogleDriveAdapter
 from src.adapters.openai_client import OpenAIAdapter
@@ -98,9 +96,7 @@ class AnalyzerService:
             logger.error(f"Error analyzing spreadsheet: {str(e)}")
             raise OpenAIError(f"Failed to analyze spreadsheet: {str(e)}") from e
 
-    def generate_insights(
-        self, file_id: str, file_name: str, use_cache: bool = True
-    ) -> Analysis:
+    def generate_insights(self, file_id: str, file_name: str, use_cache: bool = True) -> Analysis:
         """
         Generate automatic insights from a spreadsheet.
 

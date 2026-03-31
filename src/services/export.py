@@ -2,13 +2,12 @@
 
 import csv
 import logging
-import uuid
 from pathlib import Path
 from typing import Optional
 
 from src.config import settings
 from src.domain.exceptions import ApplicationError
-from src.domain.models import ExportResult, Analysis
+from src.domain.models import Analysis, ExportResult
 
 logger = logging.getLogger(__name__)
 
@@ -111,15 +110,14 @@ class ExportService:
         try:
             # Try to import reportlab
             try:
+                from reportlab.lib.enums import TA_CENTER
                 from reportlab.lib.pagesizes import letter
-                from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-                from reportlab.lib.units import inch
-                from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
-                from reportlab.lib.enums import TA_LEFT, TA_CENTER
+                from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+                from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
             except ImportError:
                 raise ApplicationError(
                     "reportlab not installed. Install with: pip install reportlab"
-                )
+                ) from None
 
             filename = f"analysis_{analysis.id[:8]}.pdf"
             filepath = self.output_dir / filename
@@ -144,9 +142,7 @@ class ExportService:
             meta_style = styles["Normal"]
             story.append(Paragraph(f"<b>Dataset ID:</b> {analysis.dataset_id}", meta_style))
             story.append(Paragraph(f"<b>Dataset Name:</b> {analysis.dataset_name}", meta_style))
-            story.append(
-                Paragraph(f"<b>Date:</b> {analysis.created_at.isoformat()}", meta_style)
-            )
+            story.append(Paragraph(f"<b>Date:</b> {analysis.created_at.isoformat()}", meta_style))
             story.append(Spacer(1, 20))
 
             # Prompt

@@ -12,9 +12,7 @@ from src.api.routes.spreadsheets import router as spreadsheets_router
 
 app = FastAPI(
     title="Google Sheets GPT Analyzer API",
-    description=(
-        "REST API for spreadsheet analysis using Google Drive and OpenAI"
-    ),
+    description=("REST API for spreadsheet analysis using Google Drive and OpenAI"),
     version="1.0.0",
 )
 

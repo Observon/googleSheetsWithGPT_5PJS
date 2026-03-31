@@ -78,7 +78,7 @@ class Settings(BaseSettings):
 try:
     settings = Settings()
     settings.ensure_directories()
-except ConfigError as e:
+except ConfigError:
     # Keep imports working when environment variables are not yet configured
     # (e.g., during test collection or static analysis).
     settings = Settings.model_construct(

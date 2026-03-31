@@ -4,10 +4,9 @@ import hashlib
 import json
 import logging
 from pathlib import Path
-from typing import Optional, Any
+from typing import Optional
 
 from src.config import settings
-from src.domain.exceptions import ApplicationError
 
 logger = logging.getLogger(__name__)
 
@@ -84,7 +83,12 @@ class CacheAdapter:
             key = self._generate_key(spreadsheet_id, prompt)
             cache_file = self.cache_dir / f"{key}.json"
 
-            data = {"key": key, "spreadsheet_id": spreadsheet_id, "prompt": prompt, "result": result}
+            data = {
+                "key": key,
+                "spreadsheet_id": spreadsheet_id,
+                "prompt": prompt,
+                "result": result,
+            }
 
             with open(cache_file, "w") as f:
                 json.dump(data, f, indent=2)

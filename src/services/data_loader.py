@@ -1,7 +1,6 @@
 """Data loading service."""
 
 import logging
-import uuid
 from typing import List, Optional
 
 import pandas as pd

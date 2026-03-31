@@ -1,17 +1,15 @@
 """Command-line interface for Google Drive + GPT Data Analyzer."""
 
 import logging
-import os
 import sys
-from pathlib import Path
 
 from src.config import settings
-from src.services.data_loader import DataLoaderService
-from src.services.analyzer import AnalyzerService
-from src.services.export import ExportService
-from src.services.batch import BatchService
-from src.services.scheduler import SchedulerService
 from src.domain.exceptions import ApplicationError
+from src.services.analyzer import AnalyzerService
+from src.services.batch import BatchService
+from src.services.data_loader import DataLoaderService
+from src.services.export import ExportService
+from src.services.scheduler import SchedulerService
 
 # Configure logging
 logging.basicConfig(
@@ -71,9 +69,7 @@ class CLIApplication:
             print(f"\n📁 Planilhas encontradas ({len(spreadsheets)}):")
             print("-" * 80)
             for i, sheet in enumerate(spreadsheets, 1):
-                modified = (
-                    sheet.modified_time[:10] if sheet.modified_time else "N/A"
-                )
+                modified = sheet.modified_time[:10] if sheet.modified_time else "N/A"
                 print(f"{i:2d}. 📊 {sheet.name}")
                 print(f"     ID: {sheet.id} | Modificado: {modified}")
                 print()
@@ -106,9 +102,7 @@ class CLIApplication:
 
                     if not prompt:
                         print("\n💡 Gerando insights automáticos...")
-                        analysis = self.analyzer.generate_insights(
-                            selected.id, selected.name
-                        )
+                        analysis = self.analyzer.generate_insights(selected.id, selected.name)
                     else:
                         print("\n🔍 Analisando com sua pergunta...")
                         analysis = self.analyzer.analyze_spreadsheet(
@@ -157,9 +151,7 @@ class CLIApplication:
                     selected = spreadsheets[sheet_choice]
                     print(f"\n💡 Gerando insights para: {selected.name}...")
 
-                    analysis = self.analyzer.generate_insights(
-                        selected.id, selected.name
-                    )
+                    analysis = self.analyzer.generate_insights(selected.id, selected.name)
 
                     self.current_file_id = selected.id
                     self.current_file_name = selected.name
@@ -236,9 +228,7 @@ class CLIApplication:
                     self.current_file_id, self.current_file_name
                 )
 
-                export_result = self.export_service.export_analysis(
-                    analysis, format_choice
-                )
+                export_result = self.export_service.export_analysis(analysis, format_choice)
 
                 print(
                     f"✅ Exportado com sucesso: {export_result.filepath} ({export_result.size_bytes} bytes)"
@@ -276,10 +266,8 @@ Analise estes dados e forneça:
             if not export_format:
                 export_format = None
 
-            print(f"\n📦 Iniciando processamento em lote...")
-            results = self.batch_service.process_folder(
-                folder_id, prompt, export_format
-            )
+            print("\n📦 Iniciando processamento em lote...")
+            results = self.batch_service.process_folder(folder_id, prompt, export_format)
 
             print("\n" + "=" * 70)
             print("📊 Resultados do Processamento em Lote")
@@ -318,11 +306,9 @@ Analise estes dados e forneça:
             if not prompt:
                 prompt = "Forneça insights principais dos dados"
 
-            job_config = self.scheduler.schedule_analysis(
-                job_id, folder_id, prompt, cron
-            )
+            job_config = self.scheduler.schedule_analysis(job_id, folder_id, prompt, cron)
 
-            print(f"\n✅ Trabalho agendado com sucesso!")
+            print("\n✅ Trabalho agendado com sucesso!")
             print(f"ID: {job_config['job_id']}")
             print(f"Expressão cron: {job_config['cron']}")
 
@@ -338,11 +324,7 @@ Analise estes dados e forneça:
     def clear_cache(self):
         """Clear the analysis cache."""
         try:
-            confirm = (
-                input("Tem certeza que deseja limpar todo o cache? (s/n): ")
-                .strip()
-                .lower()
-            )
+            confirm = input("Tem certeza que deseja limpar todo o cache? (s/n): ").strip().lower()
             if confirm == "s":
                 count = self.analyzer.clear_cache()
                 print(f"✅ Cache limpo! {count} entradas deletadas.")

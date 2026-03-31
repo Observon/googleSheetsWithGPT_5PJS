@@ -2,7 +2,7 @@
 
 import io
 import logging
-from typing import List, Dict, Optional, Any
+from typing import List, Optional
 
 import pandas as pd
 from google.oauth2 import service_account
@@ -59,12 +59,16 @@ class GoogleDriveAdapter:
             if folder_id:
                 query += f" and '{folder_id}' in parents"
 
-            results = self.service.files().list(
-                q=query,
-                pageSize=50,
-                fields="nextPageToken, files(id, name, mimeType, modifiedTime, size)",
-                orderBy="modifiedTime desc",
-            ).execute()
+            results = (
+                self.service.files()
+                .list(
+                    q=query,
+                    pageSize=50,
+                    fields="nextPageToken, files(id, name, mimeType, modifiedTime, size)",
+                    orderBy="modifiedTime desc",
+                )
+                .execute()
+            )
 
             files = results.get("files", [])
             logger.info(f"Found {len(files)} spreadsheets")
@@ -75,9 +79,7 @@ class GoogleDriveAdapter:
             logger.error(f"Error listing spreadsheets: {str(e)}")
             raise GoogleDriveError(f"Failed to list spreadsheets: {str(e)}") from e
 
-    def read_spreadsheet(
-        self, file_id: str, sheet_name: Optional[str] = None
-    ) -> pd.DataFrame:
+    def read_spreadsheet(self, file_id: str, sheet_name: Optional[str] = None) -> pd.DataFrame:
         """
         Read a Google Sheet and return as pandas DataFrame.
 
@@ -138,10 +140,14 @@ class GoogleDriveAdapter:
             GoogleDriveError: If the operation fails
         """
         try:
-            file_info = self.service.files().get(
-                fileId=file_id,
-                fields="id, name, mimeType, modifiedTime, size",
-            ).execute()
+            file_info = (
+                self.service.files()
+                .get(
+                    fileId=file_id,
+                    fields="id, name, mimeType, modifiedTime, size",
+                )
+                .execute()
+            )
 
             return FileInfo(**file_info)
 

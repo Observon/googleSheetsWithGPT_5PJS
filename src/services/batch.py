@@ -1,16 +1,14 @@
 """Batch processing service."""
 
 import logging
-from pathlib import Path
-from typing import Optional, List, Dict, Any
+from typing import Any, Dict, List, Optional
 
 from tqdm import tqdm
 
 from src.adapters.google_drive import GoogleDriveAdapter
+from src.domain.exceptions import ApplicationError
 from src.services.analyzer import AnalyzerService
 from src.services.export import ExportService
-from src.domain.exceptions import ApplicationError
-from src.domain.models import Analysis
 
 logger = logging.getLogger(__name__)
 
@@ -73,9 +71,7 @@ class BatchService:
             results = []
 
             # Process each spreadsheet with progress bar
-            for sheet in tqdm(
-                spreadsheets, desc="Processing spreadsheets", unit="sheet"
-            ):
+            for sheet in tqdm(spreadsheets, desc="Processing spreadsheets", unit="sheet"):
                 try:
                     logger.info(f"Processing: {sheet.name}")
 
@@ -149,12 +145,12 @@ class BatchService:
         results = []
 
         for file_id, file_name in tqdm(
-            zip(file_ids, file_names), desc="Processing", unit="file"
+            zip(file_ids, file_names, strict=False),
+            desc="Processing",
+            unit="file",
         ):
             try:
-                analysis = self.analyzer_service.analyze_spreadsheet(
-                    file_id, file_name, prompt
-                )
+                analysis = self.analyzer_service.analyze_spreadsheet(file_id, file_name, prompt)
 
                 result = {
                     "file_id": file_id,
@@ -165,9 +161,7 @@ class BatchService:
 
                 if export_format:
                     try:
-                        export_result = self.export_service.export_analysis(
-                            analysis, export_format
-                        )
+                        export_result = self.export_service.export_analysis(analysis, export_format)
                         result["export_path"] = export_result.filepath
                     except Exception as e:
                         result["export_error"] = str(e)

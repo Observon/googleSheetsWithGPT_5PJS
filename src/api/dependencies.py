@@ -12,7 +12,6 @@ from src.services.batch import BatchService
 from src.services.data_loader import DataLoaderService
 from src.services.export import ExportService
 
-
 _analysis_store: Dict[str, Analysis] = {}
 _analysis_lock = Lock()
 

@@ -4,14 +4,14 @@ import json
 import logging
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, List, Dict, Any
+from typing import Any, Dict, List, Optional
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 
 from src.config import settings
-from src.services.batch import BatchService
 from src.domain.exceptions import ApplicationError
+from src.services.batch import BatchService
 
 logger = logging.getLogger(__name__)
 
@@ -153,9 +153,7 @@ class SchedulerService:
         """
         try:
             logger.info(f"Running scheduled analysis for folder: {folder_id}")
-            results = self.batch_service.process_folder(
-                folder_id, prompt, export_format
-            )
+            results = self.batch_service.process_folder(folder_id, prompt, export_format)
             logger.info(f"Scheduled analysis completed: {len(results)} sheets processed")
         except Exception as e:
             logger.error(f"Error in scheduled analysis: {str(e)}")

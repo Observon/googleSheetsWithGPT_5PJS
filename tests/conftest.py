@@ -1,6 +1,5 @@
 """Pytest configuration and shared fixtures."""
 
-import json
 import tempfile
 from pathlib import Path
 from unittest.mock import MagicMock, patch
@@ -12,12 +11,14 @@ import pytest
 @pytest.fixture
 def sample_dataframe():
     """Create a sample DataFrame for testing."""
-    return pd.DataFrame({
-        "Name": ["Alice", "Bob", "Charlie"],
-        "Age": [25, 30, 35],
-        "Salary": [50000, 60000, 70000],
-        "Department": ["Sales", "IT", "Finance"],
-    })
+    return pd.DataFrame(
+        {
+            "Name": ["Alice", "Bob", "Charlie"],
+            "Age": [25, 30, 35],
+            "Salary": [50000, 60000, 70000],
+            "Department": ["Sales", "IT", "Finance"],
+        }
+    )
 
 
 @pytest.fixture
