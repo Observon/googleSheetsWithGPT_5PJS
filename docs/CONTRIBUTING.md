@@ -13,7 +13,7 @@ git clone https://github.com/YOUR-USERNAME/gpt-sheets-analyzer.git
 cd gpt-sheets-analyzer
 
 # Add upstream remote
-git remote add upstream https://github.com/yourusername/gpt-sheets-analyzer.git
+git remote add upstream https://github.com/Observon/gpt-sheets-analyzer.git
 ```
 
 ### 2. Setup Development Environment
@@ -436,8 +436,8 @@ Reviewers will check:
 ## Questions?
 
 - 📖 Read [ARCHITECTURE.md](ARCHITECTURE.md)
-- 🔍 Search [GitHub Issues](https://github.com/yourusername/gpt-sheets-analyzer/issues)
-- 💬 Create a [GitHub Discussion](https://github.com/yourusername/gpt-sheets-analyzer/discussions)
+- 🔍 Search [GitHub Issues](https://github.com/Observon/gpt-sheets-analyzer/issues)
+- 💬 Create a [GitHub Discussion](https://github.com/Observon/gpt-sheets-analyzer/discussions)
 
 ---
 
