@@ -9,6 +9,17 @@
 
 Analisa planilhas do Google Drive, extrai insights em tempo real e gera relatórios em múltiplos formatos. Ideal para automação de análises repetitivas, processamento em lote e integração com pipelines de dados.
 
+## Why This Project Matters
+
+This repository is designed to demonstrate production-oriented engineering decisions, not only features.
+
+- Clear architecture: business logic is isolated from framework and infrastructure concerns.
+- Real integrations: Google Drive and OpenAI adapters with explicit error handling paths.
+- Multi-interface delivery: both CLI and REST API are supported from the same core services.
+- Operational readiness: Dockerized runtime, CI pipeline, and deterministic dependency setup.
+- Quality focus: automated tests with meaningful service-level coverage and mock-based isolation.
+- Maintainability: typed models, documented modules, and incremental commit history.
+
 ## 🎯 Características Principais
 
 - **📋 Listagem de Planilhas** — Descubra todas as planilhas em sua conta ou pasta específica
