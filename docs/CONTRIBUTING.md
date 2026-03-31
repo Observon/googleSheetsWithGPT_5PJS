@@ -9,11 +9,11 @@ Thank you for your interest in contributing! This project welcomes all contribut
 ```bash
 # Fork the repository on GitHub
 # Then clone your fork
-git clone https://github.com/YOUR-USERNAME/googleSheetsWithGPT_5PJS.git
-cd googleSheetsWithGPT_5PJS
+git clone https://github.com/YOUR-USERNAME/gpt-sheets-analyzer.git
+cd gpt-sheets-analyzer
 
 # Add upstream remote
-git remote add upstream https://github.com/yourusername/googleSheetsWithGPT_5PJS.git
+git remote add upstream https://github.com/yourusername/gpt-sheets-analyzer.git
 ```
 
 ### 2. Setup Development Environment
@@ -262,7 +262,7 @@ Now filenames are properly sanitized.
 
 4. **Test locally**
    ```bash
-   python __main__.py  # Try the CLI (or: python -m googlesheets-gpt-analyzer)
+    python __main__.py  # Try the CLI (official module command: python -m src.cli.main)
    uvicorn src.api.main:app  # Try the API
    ```
 
@@ -436,8 +436,8 @@ Reviewers will check:
 ## Questions?
 
 - 📖 Read [ARCHITECTURE.md](ARCHITECTURE.md)
-- 🔍 Search [GitHub Issues](https://github.com/yourusername/googlesheets-gpt-analyzer/issues)
-- 💬 Create a [GitHub Discussion](https://github.com/yourusername/googleSheetsWithGPT_5PJS/discussions)
+- 🔍 Search [GitHub Issues](https://github.com/yourusername/gpt-sheets-analyzer/issues)
+- 💬 Create a [GitHub Discussion](https://github.com/yourusername/gpt-sheets-analyzer/discussions)
 
 ---
 
