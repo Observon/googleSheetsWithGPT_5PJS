@@ -1,6 +1,6 @@
 # Google Drive + GPT Data Analyzer
 
-[![Tests](https://github.com/yourusername/googlesheets-gpt-analyzer/actions/workflows/test.yml/badge.svg)](https://github.com/yourusername/googlesheets-gpt-analyzer/actions)
+[![Tests](https://github.com/yourusername/gpt-sheets-analyzer/actions/workflows/test.yml/badge.svg)](https://github.com/yourusername/gpt-sheets-analyzer/actions)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
@@ -28,8 +28,8 @@ Analisa planilhas do Google Drive, extrai insights em tempo real e gera relatór
 
 ```bash
 # Clone e acesse o repositório
-git clone https://github.com/yourusername/googlesheets-gpt-analyzer.git
-cd googlesheets-gpt-analyzer
+git clone https://github.com/yourusername/gpt-sheets-analyzer.git
+cd gpt-sheets-analyzer
 
 # Crie um ambiente virtual
 python -m venv .venv
@@ -65,10 +65,8 @@ GOOGLE_DRIVE_FOLDER_ID=opcional
 ```bash
 # CLI Interativa
 python __main__.py
-# ou
-python -m googlesheets-gpt-analyzer
 
-# ou diretamente (sem o wrapper de compatibilidade)
+# Comando oficial por modulo
 python -m src.cli.main
 ```
 
@@ -144,7 +142,7 @@ curl http://localhost:8000/sheets
 
 ```bash
 # Build image
-docker build -t googlesheets-gpt-analyzer:latest .
+docker build -t gpt-sheets-analyzer:latest .
 
 # Run API
 docker compose up api
@@ -329,8 +327,8 @@ Contribuições são bem-vindas! Veja [CONTRIBUTING.md](docs/CONTRIBUTING.md) pa
 
 ## 💬 Suporte
 
-- 🐛 [Report a Bug](https://github.com/yourusername/googlesheets-gpt-analyzer/issues)
-- 💡 [Feature Request](https://github.com/yourusername/googlesheets-gpt-analyzer/issues)
+- 🐛 [Report a Bug](https://github.com/yourusername/gpt-sheets-analyzer/issues)
+- 💡 [Feature Request](https://github.com/yourusername/gpt-sheets-analyzer/issues)
 - 📖 [Documentação](docs/)
 
 ---
